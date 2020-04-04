@@ -1,0 +1,197 @@
+package test.java.com.starpath.smart;
+
+import com.starpath.smart.base.BaseTest;
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+@RunWith(BlockJUnit4ClassRunner.class)
+public class DealsTest extends BaseTest {
+    private WebDriver driver;
+
+    //LOGIN
+    private static final By LoginHeadingPath = By.xpath("//*[@id=\"login\"]/div/div[1]/div/h2");
+    private static final By LoginEmailFieldPath = By.xpath("//*[@id=\"Email\"]");
+    private static final By LoginPasswordFieldPath = By.xpath("//*[@id=\"Password\"]");
+    private static final By LoginButtonPath = By.xpath("//*[@id=\"loginButton\"]");
+
+    //DEALS
+    private static final By DealsButtonPath = By.xpath("//*[@id=\"navbarCollapse\"]/ul/li[2]/div/a[3]");
+    private static final By ApplicationStatusSearchHeadingPath = By.xpath("//*[@id=\"news\"]/div/div[1]/div/div[2]/div/form/div/label/span/h2");
+    //Add Application Status Search Option Paths
+    private static final By ApplicationStatusSearchButtonPath = By.xpath("//*[@id=\"news\"]/div/div[1]/div/div[2]/button");
+    private static final By ApplicationStatusCancelButtonPath = By.xpath("//*[@id=\"news\"]/div/div[1]/div/div[2]/a");
+    private static final By ApplicationsHeadingPath = By.xpath("//*[@id=\"news\"]/div/div[2]/h2");
+    //Add Show Entries Paths
+    private static final By IDColumnPath = By.xpath("//*[@id=\"deals\"]/thead/tr/th[1]");
+    private static final By ApplicationDateColumnPath = By.xpath("//*[@id=\"deals\"]/thead/tr/th[2]");
+    private static final By LocationColumnPath = By.xpath("//*[@id=\"deals\"]/thead/tr/th[3]");
+    private static final By WebsiteColumnPath = By.xpath("//*[@id=\"deals\"]/thead/tr/th[4]");
+    private static final By ReferrerColumnPath = By.xpath("//*[@id=\"deals\"]/thead/tr/th[5]");
+    private static final By FounderNameColumnPath = By.xpath("//*[@id=\"deals\"]/thead/tr/th[6]");
+    private static final By StartupNameColumnPath = By.xpath("//*[@id=\"deals\"]/thead/tr/th[7]");
+    private static final By SearchLabelPath = By.xpath("//*[@id=\"deals_filter\"]/label");
+    private static final By SearchFieldPath = By.xpath("//*[@id=\"deals_filter\"]/label/input");
+    private static final By PreviousPageButtonPath = By.xpath("/html/body/section/div/div[2]/div/div/div[3]/div[2]/div/ul/li[1]");
+    private static final By NextPageButtonPath = By.xpath("//*[@id=\"deals_next\"]/a");
+    //Add Page Number Paths
+    //Application Button Paths?
+
+    //LOGOUT
+    private static final By LogoutButtonPath = By.xpath("//*[@id=\"navbarCollapse\"]/ul/li[2]/a");
+
+
+    @Before
+    public void createAndStartService() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Software\\chromedriver_win32\\chromedriver.exe");
+        //Krishna's: System.setProperty("webdriver.chrome.driver", "/Users/krishnakunapuli/projects/chromedriver");
+        driver = new ChromeDriver();
+        //9999 for Niharika and 8888 for Krishna
+        driver.get("http://localhost:9999/appl"); //Change URL
+
+        //Web Element Declarations
+        WebElement loginHeading = driver.findElement(LoginHeadingPath);
+        Assert.assertNotNull(loginHeading);
+        Assert.assertEquals("LOGIN", loginHeading.getText());
+
+        WebElement loginButton = driver.findElement(LoginButtonPath);
+        Assert.assertNotNull(loginButton);
+
+        WebElement email = driver.findElement(LoginEmailFieldPath);
+        Assert.assertNotNull(email);
+
+        //Login Elements
+        WebElement password = driver.findElement(LoginPasswordFieldPath);
+        Assert.assertNotNull(password);
+
+        email.sendKeys("fundone@3lines.vc");
+        password.sendKeys("Support@2019");
+        loginButton.click();
+
+        WebElement dealsButton = driver.findElement(DealsButtonPath);
+        Assert.assertNotNull(dealsButton);
+
+        dealsButton.click();
+
+        //Set-Up for Deals Page
+        WebElement appStatusSearchHeading = driver.findElement(ApplicationStatusSearchHeadingPath);
+        Assert.assertNotNull(appStatusSearchHeading);
+
+        WebElement appStatusSearchButton = driver.findElement(ApplicationStatusSearchButtonPath);
+        Assert.assertNotNull(appStatusSearchButton);
+
+        WebElement appStatusCancelButton = driver.findElement(ApplicationStatusCancelButtonPath);
+        Assert.assertNotNull(appStatusCancelButton);
+
+        WebElement appHeading = driver.findElement(ApplicationsHeadingPath);
+        Assert.assertNotNull(appHeading);
+
+        WebElement idColumn = driver.findElement(IDColumnPath);
+        Assert.assertNotNull(idColumn);
+
+        WebElement appDateColumn = driver.findElement(ApplicationDateColumnPath);
+        Assert.assertNotNull(appDateColumn);
+
+        WebElement locationColumn = driver.findElement(LocationColumnPath);
+        Assert.assertNotNull(locationColumn);
+
+        WebElement websiteColumn = driver.findElement(WebsiteColumnPath);
+        Assert.assertNotNull(websiteColumn);
+
+        WebElement referrerColumn = driver.findElement(ReferrerColumnPath);
+        Assert.assertNotNull(referrerColumn);
+
+        WebElement founderNameColumn = driver.findElement(FounderNameColumnPath);
+        Assert.assertNotNull(founderNameColumn);
+
+        WebElement startupNameColumn = driver.findElement(StartupNameColumnPath);
+        Assert.assertNotNull(startupNameColumn);
+
+        WebElement searchLabel = driver.findElement(SearchLabelPath);
+        Assert.assertNotNull(searchLabel);
+
+        WebElement searchField = driver.findElement(SearchFieldPath);
+        Assert.assertNotNull(searchField);
+
+        WebElement previousButton = driver.findElement(PreviousPageButtonPath);
+        Assert.assertNotNull(previousButton);
+
+        WebElement nextButton = driver.findElement(NextPageButtonPath);
+        Assert.assertNotNull(nextButton);
+
+        //Logout Elements
+        WebElement logoutButton = driver.findElement(LogoutButtonPath);
+        Assert.assertNotNull(logoutButton);
+    }
+
+    @After
+    public void createAndStopService() {
+        driver.close();
+    }
+
+
+    @Test
+    public void testDealsPass() {
+       //Make sure the searches work, the text field takes proper inputs, etc.
+    }
+
+    /**
+     * @NEGATIVE TESTING
+     * Search Field
+     */
+
+    @Test
+    public void testSearchText() {
+        /*Conduct tests for the following scenarios:
+            1. Unique Characters (such as random chinese characters)
+            2. Numbers
+            3. Large Number of Characters at Once
+            4. SQL Injections
+            5. XSS
+        */
+    }
+
+    @Test
+    public void testSQLInjections()
+    {
+        //Search Field
+    }
+
+    @Test
+    public void testXSS()
+    {
+        //Search Field
+    }
+
+    /**
+     * @GENERAL TESTING
+     */
+    @Test
+    public void testNavbar(){
+
+    }
+
+    @Test
+    public void testBackToPortfolio(){
+
+    }
+
+    @Test
+    public void testFooter(){
+
+    }
+}

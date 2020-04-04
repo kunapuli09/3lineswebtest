@@ -39,7 +39,7 @@ public class LoginPageTest extends BaseTest {
 
     @Before
     public void createAndStartService(){
-        System.setProperty("webdriver.chrome.driver", "/Users/krishnakunapuli/projects/chromedriver");
+        //Krishna's: System.setProperty("webdriver.chrome.driver", "/Users/krishnakunapuli/projects/chromedriver");
         driver = new ChromeDriver();
         driver.get("http://localhost:8888/login");
 

@@ -77,9 +77,10 @@ public class ApplicationFormTest extends BaseTest {
     private static final String successMessage = "Thank You for applying. Pls send the deck to dsc@3lines.vc We will get back to you soon.";
     @Before
     public void createAndStartService() {
-        System.setProperty("webdriver.chrome.driver", "/Users/krishnakunapuli/projects/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\Software\\chromedriver_win32\\chromedriver.exe");
+        //Krishna's: System.setProperty("webdriver.chrome.driver", "/Users/krishnakunapuli/projects/chromedriver");
         driver = new ChromeDriver();
-        driver.get("http://localhost:8888/appl");
+        driver.get("http://localhost:9999/appl");
 
         WebElement appHeading = driver.findElement(APP_HEADING_PATH);
         Assert.assertEquals("APPLICATION FOR FUNDING", appHeading.getText());

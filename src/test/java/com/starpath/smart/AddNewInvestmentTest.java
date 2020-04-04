@@ -90,9 +90,11 @@ public class AddNewInvestmentTest extends BaseTest {
 
     @Before
     public void createAndStartService() {
-        System.setProperty("webdriver.chrome.driver", "/Users/krishnakunapuli/projects/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\Software\\chromedriver_win32\\chromedriver.exe");
+        //Krishna's: System.setProperty("webdriver.chrome.driver", "/Users/krishnakunapuli/projects/chromedriver");
         driver = new ChromeDriver();
-        driver.get("http://localhost:8888/login");
+        //9999 for Niharika and 8888 for Krishna
+        driver.get("http://localhost:9999/appl"); //Change URL
 
         //Web Element Declarations
         WebElement loginHeading = driver.findElement(LoginHeadingPath);
@@ -306,14 +308,178 @@ public class AddNewInvestmentTest extends BaseTest {
         logo.sendKeys("/img.png");
         description.sendKeys("");
         industry.sendKeys("");
+        //Select "Fund Legal Name" --> Dropdown
+        //Fill in "Startup" --> Text Input
+        //Fill in "Website" --> Special
+        //Fill in "Team" --> Text Input
+        //Fill in "Logo Name/Path" --> Special
+        //Fill in "Description" --> Text Input
+        //Fill in "Industry" --> Text Input
+        //Fill in "Investment Date" --> Special
+        //Fill in "Headquarters" --> Text Input
+        //Fill in "Cap Table" --> Text Input
+        //Fill in "Board Representation" --> Text Input
+        //Fill in "Board Members" --> Text Input
+        //Fill in "Enterprise Value at Closing" --> Numbers
+        //Fill in "Fund Ownership %" --> Numbers
+        //Fill in "Investment Group %" --> Numbers
+        //Fill in "Management Ownership %" --> Numbers
+        //Fill in "Investment Commitment" --> NOTE: Commitment is spelled wrong on the site --> Numbers
+        //Fill in "Invested Capital" --> Numbers
+        //Fill in "Realized Proceeds" --> Numbers
+        //Fill in "Reported Value" --> Numbers
+        //Fill in "Investment Multiple ( number of times)" --> Numbers
+        //Fill in "Gross Internal Rate of Return (tool tip, link chart)" --> Numbers
+        //Select "Status" --> Dropdown
+        //Fill in "Investment Background" --> Text Input
+        //Fill in "Investment Thesis" --> Text Input
+        //Fill in "Valuation Methodology" --> Text Input
+        //Fill in "Risk Assessment" --> Text Input
+    }
 
+    /**
+     * @NEGATIVE TESTING
+     * Make sure investment is not added with blank values (submit empty form)
+     * For text fields and text areas, try to overload with too many characters or characters that are not limited to letters.
+     * Website: Enter invalid URLs; ones w/out .com, .edu, .us, etc. Enter just numbers.
+     * Logo Name/Path: Enter just numbers, enter invalid paths, enter paths in wrong format, enter names w/out .jpeg, .png, etc.
+     * SQL Injections
+     * Investment Date: Enter date in wrong format, enter date w/ only a few of the variables, enter other characters
+     * For all the fields w/ numbers only, test negative values, large-scale numbers, letters, unique characters
+     */
+    @Test
+    public void testAddNewInvestmentBlank() {
+        //Empty Form Test
+        //Click "Update" Button
     }
 
     @Test
-    public void testAddNewInvestmentFail() {
+    public void testAddNewInvestmentText() {
+        /*Conduct tests for the following scenarios:
+            1. Unique Characters (such as random chinese characters)
+            2. Numbers
+            3. Large Number of Characters at Once
+        */
 
+        //Fill in "Startup"
+        //Fill in "Website"
+        //Fill in "Team"
+        //Fill in "Logo Name/Path"
+        //Fill in "Description" --> NOTE: DESCRIPTION DOES NOT HAVE NAME SPECIFIED
+        //Fill in "Industry"
+        //Fill in "Investment Date"
+        //Fill in "Headquarters"
+        //Fill in "Cap Table"
+        //Fill in "Board Representation" --> NOTE: This can just be two numeric inputs formatted to be like "0 of 3"
+        //Fill in "Board Members"
+        //Fill in "Investment Background"
+        //Fill in "Investment Thesis"
+        //Fill in "Valuation Methodology"
+        //Fill in "Risk Assessment"
+
+        //Click "Update" Button
     }
 
+    @Test
+    public void testAddNewInvestmentNumbers() {
+        /*Conduct tests for the following scenarios:
+            1. Unique Characters (such as random chinese characters)
+            2. Letters
+            3. Large Numbers
+            4. Negative Numbers
+        */
+
+        //Fill in "Enterprise Value at Closing"
+        //Fill in "Fund Ownership %"
+        //Fill in "Investment Group %"
+        //Fill in "Management Ownership %"
+        //Fill in "Investment Commitment" --> NOTE: Commitment is spelled wrong on the site
+        //Fill in "Invested Capital"
+        //Fill in "Realized Proceeds"
+        //Fill in "Reported Value"
+        //Fill in "Investment Multiple ( number of times)"
+        //Fill in "Gross Internal Rate of Return (tool tip, link chart)"
+
+        //Click "Update" Button
+    }
+
+    @Test
+    public void testAddNewInvestmentWebsite() {
+        /*Conduct tests for the following scenarios:
+            1. Invalid URLs; ones w/out .com, .edu, .us, etc.
+            2. Numbers
+            3. Unique Characters
+            4. Large Number of Characters at Once
+        */
+
+        //Fill in "Website" --> Special
+
+        //Click "Update" Button
+    }
+
+    @Test
+    public void testSQLInjections() {
+        //Fill in "Startup"
+        //Fill in "Website"
+        //Fill in "Team"
+        //Fill in "Logo Name/Path"
+        //Fill in "Description" --> NOTE: DESCRIPTION DOES NOT HAVE NAME SPECIFIED
+        //Fill in "Industry"
+        //Fill in "Investment Date"
+        //Fill in "Headquarters"
+        //Fill in "Cap Table"
+        //Fill in "Board Representation" --> NOTE: This can just be two numeric inputs formatted to be like "0 of 3"
+        //Fill in "Board Members"
+        //Fill in "Investment Background"
+        //Fill in "Investment Thesis"
+        //Fill in "Valuation Methodology"
+        //Fill in "Risk Assessment"
+        //Fill in "Enterprise Value at Closing"
+        //Fill in "Fund Ownership %"
+        //Fill in "Investment Group %"
+        //Fill in "Management Ownership %"
+        //Fill in "Investment Commitment" --> NOTE: Commitment is spelled wrong on the site
+        //Fill in "Invested Capital"
+        //Fill in "Realized Proceeds"
+        //Fill in "Reported Value"
+        //Fill in "Investment Multiple ( number of times)"
+        //Fill in "Gross Internal Rate of Return (tool tip, link chart)"
+        //Fill in "Website"
+    }
+
+    @Test
+    public void testXSS() {
+        //Fill in "Startup"
+        //Fill in "Website"
+        //Fill in "Team"
+        //Fill in "Logo Name/Path"
+        //Fill in "Description" --> NOTE: DESCRIPTION DOES NOT HAVE NAME SPECIFIED
+        //Fill in "Industry"
+        //Fill in "Investment Date"
+        //Fill in "Headquarters"
+        //Fill in "Cap Table"
+        //Fill in "Board Representation" --> NOTE: This can just be two numeric inputs formatted to be like "0 of 3"
+        //Fill in "Board Members"
+        //Fill in "Investment Background"
+        //Fill in "Investment Thesis"
+        //Fill in "Valuation Methodology"
+        //Fill in "Risk Assessment"
+        //Fill in "Enterprise Value at Closing"
+        //Fill in "Fund Ownership %"
+        //Fill in "Investment Group %"
+        //Fill in "Management Ownership %"
+        //Fill in "Investment Commitment" --> NOTE: Commitment is spelled wrong on the site
+        //Fill in "Invested Capital"
+        //Fill in "Realized Proceeds"
+        //Fill in "Reported Value"
+        //Fill in "Investment Multiple ( number of times)"
+        //Fill in "Gross Internal Rate of Return (tool tip, link chart)"
+        //Fill in "Website"
+    }
+
+    /**
+     * @GENERAL TESTING
+     */
     @Test
     public void testNavbar(){
 
